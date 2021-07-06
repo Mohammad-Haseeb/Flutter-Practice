@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -17,9 +18,10 @@ class MyApp extends StatelessWidget {
              child: FlatButton(
                color: color,
                onPressed: (){
-                 print(number);
+                 final player = AudioCache();
+                 player.play('note$number.wav');
                },
-               child: const Text("Hello"),
+               child: const Text("Play"),
              ),
            );
 
