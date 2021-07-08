@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'QuestionsData.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 QuestionProvider questionProvider= QuestionProvider();
 
 void main() {
@@ -21,9 +23,24 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
+
 class _MyAppState extends State<MyApp> {
+
   int questionNumber=0;
- void questionIncrementor(){
+  List<Widget> iconsList=[];
+
+  void questionIncrementor(bool value){
+      if(questionProvider.questionResult(questionNumber)==true){
+        iconsList.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      }else{
+   iconsList.add(Icon(
+   Icons.close,
+   color: Colors.red,
+   ));
+      }
        questionNumber++;
   }
 
@@ -43,6 +60,7 @@ class _MyAppState extends State<MyApp> {
                     child: Container(
                       child: Text(
                         questionProvider.questionSent(questionNumber),
+
                         style: const TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 20,
@@ -62,7 +80,26 @@ class _MyAppState extends State<MyApp> {
                     FlatButton(
                       onPressed: () {
                          setState((){
-                           questionIncrementor();
+                           questionIncrementor(false);
+                           if(questionProvider.questionSent(questionNumber)=="empty"){
+                             Alert(
+                               context: context,
+                               type: AlertType.success,
+                               title: "Quizz End",
+                               desc: "Thanks For Quizz",
+                               buttons: [
+                                 DialogButton(
+                                   child: Text(
+                                     "Restart",
+                                     style: TextStyle(color: Colors.white, fontSize: 20),
+                                   ),
+                                   onPressed: () => {setState((){questionNumber=0;})},
+
+                                   width: 120,
+                                 )
+                               ],
+                             ).show();
+                           }
 
                          });
                       },
@@ -83,7 +120,27 @@ class _MyAppState extends State<MyApp> {
                     FlatButton(
                       onPressed: () {
                         setState((){
-                          questionIncrementor();
+                          questionIncrementor(true);
+                          if(questionProvider.questionSent(questionNumber)=="empty"){
+                            Alert(
+                              context: context,
+                              type: AlertType.error,
+                              title: "Quizz End",
+                              desc: "Thanks For  Quizz",
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    "Restart",
+                                    style: TextStyle(color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () => {setState((){questionNumber=0;})
+                                  },
+
+                                  width: 120,
+                                )
+                              ],
+                            ).show();
+                          }
 
                         });
 
@@ -107,9 +164,7 @@ class _MyAppState extends State<MyApp> {
               child: Container(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(child: const Icon(Icons.ac_unit))
-                  ],
+                  children:iconsList
                 ),
               ),
             )

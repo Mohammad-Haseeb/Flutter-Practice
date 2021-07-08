@@ -39,7 +39,14 @@ class QuestionProvider {
     if (value >= 0 && value < _questionBank.length) {
       return _questionBank[value].question;
     } else {
-      return "empty";
+      return "Thanks For Quizz";
+    }
+  }
+  bool questionResult(int value){
+    if (value >= 0 && value < _questionBank.length) {
+      return _questionBank[value].answer;
+    } else {
+      return false;
     }
   }
 }
