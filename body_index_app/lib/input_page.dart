@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:body_index_app/reusable.dart';
 import 'package:body_index_app/icon_content.dart';
+import 'package:body_index_app/customize_rawbutton.dart';
+import 'result_screen.dart';
 
 const kActiveCardColour = Color(0xFF1D1E33);
 const kInactiveCardColour = Color(0xFF111328);
@@ -137,26 +139,38 @@ class _InputPageState extends State<InputPage> {
               ),
             ],
           ),
-        )
+        ),
+        ButtomButton()
+
+
       ],
     );
+
+
   }
 }
 
-class RawMaterialBtn extends StatelessWidget {
-  RawMaterialBtn({@required this.icon,this.pressed});
-  final IconData? icon;
-  final  VoidCallback? pressed;
+class ButtomButton extends StatelessWidget {
+  const ButtomButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed:pressed,
-      child: Icon(icon,color: Colors.black,),
-      constraints: BoxConstraints.tightFor(width: 56.0, height: 56.0),
-      elevation: 30.0,
-      fillColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+    return GestureDetector(
+      onTap: (){
+       Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultsPage()));
+      },
+      child: Container(
+        child: Center(child: Text("Result Check")),
+        width: double.infinity,
+        height: 40,
+        color: Colors.pink,
+
+      ),
     );
   }
 }
+
+
+
+
+
