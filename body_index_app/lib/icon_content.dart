@@ -14,12 +14,12 @@ class IconsContent extends StatelessWidget {
             icon,
             size: 80,
           ),
-        const  SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Text(
             label.toString(),
-            style: const  TextStyle(fontSize: 18.0, color: Color(0xFF8D8E98)),
+            style: const TextStyle(fontSize: 18.0, color: Color(0xFF8D8E98)),
           ),
         ]);
   }

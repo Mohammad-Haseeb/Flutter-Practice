@@ -10,7 +10,7 @@ void main(){
     ),
 
     home:Scaffold(
-      appBar: AppBar(title:  const Text("BMIT"),),
+      appBar: AppBar(title:  const Text("BMI"),),
       body:  InputPage(),
     ),
 
