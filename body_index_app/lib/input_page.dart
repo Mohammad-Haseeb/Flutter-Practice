@@ -16,6 +16,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
+  int sliderValue=120;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,7 +46,42 @@ class _InputPageState extends State<InputPage> {
             ),
           ],
         )),
-        ResuableCard(color: kActiveCardColour),
+        ResuableCard(color: kActiveCardColour,childWidget:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: const [
+                Text("180",style:   TextStyle(fontSize: 38.0, color: Color(0xFF8D8E98)),),
+                Text("cm")
+              ],
+            ),
+            SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                thumbColor: Colors.pink,
+                activeTrackColor: Colors.white,
+                overlayColor: Color(0x29EB1555),
+                 thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0)
+
+              ),
+              child: Slider(value: sliderValue.toDouble(), onChanged: (double  newValue){
+                setState(() {
+                  sliderValue=newValue.round();
+                });
+
+              },
+              max: 220.0,
+              min: 120.0,
+
+
+              ),
+            )
+
+          ],
+        )),
         ResuableCard(color: kActiveCardColour)
       ],
     );
