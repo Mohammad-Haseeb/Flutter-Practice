@@ -5,6 +5,7 @@ import 'package:body_index_app/icon_content.dart';
 
 const kActiveCardColour = Color(0xFF1D1E33);
 const kInactiveCardColour = Color(0xFF111328);
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -14,34 +15,39 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender? selectedGender;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(child: Row(
+        Expanded(
+            child: Row(
           children: [
-            ResuableCard(color:  kActiveCardColour ,
-                childWidget: IconsContent(icon: FontAwesomeIcons.male, label: "Male"),
-              onPress: ()=>{
-              print("Hello")
+            ResuableCard(
+              color: selectedGender == Gender.male
+                  ? kActiveCardColour
+                  : kInactiveCardColour,
+              childWidget:
+                  IconsContent(icon: FontAwesomeIcons.male, label: "Male"),
+              onPress: () => {
+                setState(() => {selectedGender = Gender.male})
               },
             ),
-            ResuableCard(color:  kActiveCardColour ,
-              childWidget: IconsContent(icon: FontAwesomeIcons.female, label: "Female"),
-              onPress: ()=>{
-                print("Hello")
+            ResuableCard(
+              color: selectedGender == Gender.female
+                  ? kActiveCardColour
+                  : kInactiveCardColour,
+              childWidget:
+                  IconsContent(icon: FontAwesomeIcons.female, label: "Female"),
+              onPress: () => {
+                setState(() => {selectedGender = Gender.female})
               },
             ),
-
           ],
         )),
-        ResuableCard(color:  kActiveCardColour ),
-        ResuableCard(color:  kActiveCardColour )
-
-
-
+        ResuableCard(color: kActiveCardColour),
+        ResuableCard(color: kActiveCardColour)
       ],
     );
   }
 }
-
