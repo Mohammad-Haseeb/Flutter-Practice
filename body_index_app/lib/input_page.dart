@@ -36,6 +36,8 @@ class _InputPageState extends State<InputPage> {
                 setState(() => {selectedGender = Gender.male})
               },
             ),
+    const SizedBox(width: 03,)
+    ,
             ResuableCard(
               color: selectedGender == Gender.female
                   ? kActiveCardColour
@@ -48,6 +50,8 @@ class _InputPageState extends State<InputPage> {
             ),
           ],
         )),
+        const SizedBox(height: 04,),
+
         ResuableCard(
             color: kActiveCardColour,
             childWidget: Column(
@@ -88,6 +92,9 @@ class _InputPageState extends State<InputPage> {
                 )
               ],
             )),
+        const SizedBox(height: 04,),
+
+
         ResuableCard(
           color: kActiveCardColour,
           childWidget: Row(
@@ -96,8 +103,14 @@ class _InputPageState extends State<InputPage> {
                 color: kActiveCardColour,
                 childWidget: Column(
                   children: [
-                    const Text("Weight"),
-                    const Text("300"),
+                    const Text("Weight",style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Snell Roundhand'
+                    ),),
+                    const Text("300",style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Snell Roundhand'
+                    )),
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -120,8 +133,14 @@ class _InputPageState extends State<InputPage> {
                 color: kActiveCardColour,
                 childWidget: Column(
                   children: [
-                    const Text("Weight"),
-                    const Text("300"),
+                    const Text("Weight",style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Snell Roundhand'
+                    )),
+                    const Text("300",style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Snell Roundhand'
+                    )),
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -140,6 +159,8 @@ class _InputPageState extends State<InputPage> {
             ],
           ),
         ),
+        const SizedBox(height: 04,),
+
         ButtomButton()
 
 
@@ -160,7 +181,10 @@ class ButtomButton extends StatelessWidget {
        Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultsPage()));
       },
       child: Container(
-        child: Center(child: Text("Result Check")),
+        child: const Center(child: Text("Result Check",style: TextStyle(
+             fontSize: 20,
+          fontFamily: 'Snell Roundhand'
+        ),)),
         width: double.infinity,
         height: 40,
         color: Colors.pink,

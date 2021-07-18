@@ -17,7 +17,6 @@ class ResuableCard extends StatelessWidget {
 
           ),
           child: childWidget,
-          margin: EdgeInsets.all(02),
         ),
       ),
     );
