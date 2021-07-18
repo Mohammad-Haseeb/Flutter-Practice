@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:body_index_app/reusable.dart';
+import 'package:body_index_app/icon_content.dart';
+
+const kActiveCardColour = Color(0xFF1D1E33);
+const kInactiveCardColour = Color(0xFF111328);
+
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
 
@@ -14,15 +20,24 @@ class _InputPageState extends State<InputPage> {
       children: [
         Expanded(child: Row(
           children: [
-            ResuableCard(color: Colors.lightBlue[800],
-                childWidget: IconsContent(icon: FontAwesomeIcons.male, label: "Male"),),
-            ResuableCard(color: Colors.lightBlue[800],
-              childWidget: IconsContent(icon: FontAwesomeIcons.female, label: "Female"),),
+            ResuableCard(color:  kActiveCardColour ,
+                childWidget: IconsContent(icon: FontAwesomeIcons.male, label: "Male"),
+              onPress: ()=>{
+              print("Hello")
+              },
+            ),
+            ResuableCard(color:  kActiveCardColour ,
+              childWidget: IconsContent(icon: FontAwesomeIcons.female, label: "Female"),
+              onPress: ()=>{
+                print("Hello")
+              },
+            ),
 
           ],
         )),
-        Expanded(child: Container(child: null,)),
-        Expanded(child: Container(child: null,))
+        ResuableCard(color:  kActiveCardColour ),
+        ResuableCard(color:  kActiveCardColour )
+
 
 
       ],
@@ -30,44 +45,3 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class ResuableCard extends StatelessWidget {
-    ResuableCard({@required this.color, @required this.childWidget});
-    final Color? color;
-    final Widget? childWidget;
-  @override
-  Widget build(BuildContext context) {
-    return  Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: color,
-
-        ),
-        child: childWidget,
-        margin: EdgeInsets.all(05),
-      ),
-    );
-  }
-}
-
-class IconsContent extends StatelessWidget {
-       IconsContent({@required this.icon, @required this.label });
-    final String? label;
-    final IconData? icon;
-
-
-  @override
-  Widget build(BuildContext context) {
-    return  Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children :   <Widget>   [
-          Icon(icon,size: 80,),
-          SizedBox(height: 15,),
-          Text(label.toString(),style: TextStyle(fontSize: 18.0,color: Color(0xFF8D8E98)),),
-
-
-        ]
-
-    ) ;
-  }
-}
