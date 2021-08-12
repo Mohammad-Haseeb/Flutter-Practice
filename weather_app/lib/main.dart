@@ -5,13 +5,10 @@ import 'services/location.dart';
 
 const key ='10&appid=9a38e288fca05574a51a17ab11b484a8';
 void main() {
-  runApp(
-    MaterialApp(
-      theme: ThemeData.dark(),
-      title: "Weather",
-
-    ),
-  );
+  runApp( MaterialApp(
+    theme: ThemeData.dark(),
+    home: Main(),
+  ));
 }
 
 class Main extends StatefulWidget {
