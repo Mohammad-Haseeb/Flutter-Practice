@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "646364113558",
+    "project_id": "admin-virtual-book-store",
+    "storage_bucket": "admin-virtual-book-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646364113558:android:156452086494d8f10430b7",
+        "android_client_info": {
+          "package_name": "com.example.admin_virtual_book_store.admin_virtual_book_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646364113558-s3mrv7nftqdq2hj8rsdg3g1dmf4t1bg4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZlXfWmzsk8P8jgCZJ1j4g6zCQVk0V3x4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646364113558-s3mrv7nftqdq2hj8rsdg3g1dmf4t1bg4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
