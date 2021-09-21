@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:admin_virtual_book_store/Helpers/registration_page_constant.dart';
 import 'package:admin_virtual_book_store/Components/passwordvisibilty.dart';
-import 'package:admin_virtual_book_store/Screens/shopinfo.dart';
+import 'package:admin_virtual_book_store/Screens/payment_registration.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:admin_virtual_book_store/Screens/login.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:admin_virtual_book_store/Controller/main.dart';
+import 'package:admin_virtual_book_store/Controller/person.dart';
+import 'package:admin_virtual_book_store/Controller/seller.dart';
 
 class RegistrationPageOne extends StatefulWidget {
   const RegistrationPageOne({Key? key}) : super(key: key);
@@ -16,29 +19,48 @@ class RegistrationPageOne extends StatefulWidget {
 }
 
 class _RegistrationPageOneState extends State<RegistrationPageOne> {
+  // FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   final _formKey = GlobalKey<FormState>();
-  final emailController=TextEditingController();
-  final addressController=TextEditingController();
-  final phoneNumberController=TextEditingController();
-  final nameController=TextEditingController();
-  final passwordController=TextEditingController();
+  final emailController = TextEditingController();
+  final addressController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final nameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   bool _isObscure = true;
   void validate() async {
-
-
     if (_formKey.currentState!.validate()) {
       try {
-        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text.toString(),
-            password: passwordController.text.toString(),
-        );
-        print("Done ");
+        // UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        //     email: emailController.text.toString(),
+        //     password: passwordController.text.toString(),
+        // );
+        // CollectionReference users = FirebaseFirestore.instance.collection('users');
+        // users
+        //     .doc(userCredential.user.uid)
+        //     .set({
+        //   'full_name': "Mary Jane",
+        //   'age': 18
+        // });
+        Main.seller =Seller("Hello");
+       Main.seller?.AllInfoSetter(nameController.text
+           ,phoneNumberController.text,emailController.text,passwordController.text ,addressController.text);
+        //
+             print("oy ${Main.seller?.getphoneNumber()}");
+        print('OY ${Main.seller?.getAddress()}');
+        print("OY+ ${Main.seller?.getEmail()}");
+        print('Hello  ${Main.seller?.getPassword()}');
+            print('YO Name ${Main.seller?.name}');
+
+
+        // 2222 4000 7000 0005
+        //      print(Main.seller?.getPassword());
+        // print("Checking"+Main.seller.getAddress());
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  LoginScreen()),
+          MaterialPageRoute(builder: (context) => PaymentRegistration()),
         );
-
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           print('The password provided is too weak.');
@@ -48,11 +70,11 @@ class _RegistrationPageOneState extends State<RegistrationPageOne> {
       } catch (e) {
         print(e);
       }
-      print(emailController.text);
-      print(addressController.text);
-      print(phoneNumberController.text);
-      print(nameController.text);
-      print(passwordController.text);
+      // print(emailController.text);
+      // print(addressController.text);
+      // print(phoneNumberController.text);
+      // print(nameController.text);
+      // print(passwordController.text);
       // Navigator.push(
       //   context,
       //   MaterialPageRoute(builder: (context) =>  MySample()),
@@ -102,8 +124,8 @@ class _RegistrationPageOneState extends State<RegistrationPageOne> {
                     ),
                     const Sizer(),
                     TextFormField(
-                      controller: nameController,
-                        validator:KNameValidator,
+                        controller: nameController,
+                        validator: KNameValidator,
                         keyboardType: TextInputType.name,
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
@@ -113,7 +135,7 @@ class _RegistrationPageOneState extends State<RegistrationPageOne> {
                                 child: Icon(Icons.person)))),
                     const Sizer(),
                     TextFormField(
-                      controller: phoneNumberController,
+                        controller: phoneNumberController,
                         validator: KPhoneNumberValidaor,
                         keyboardType: TextInputType.phone,
                         decoration: const InputDecoration(
@@ -146,6 +168,7 @@ class _RegistrationPageOneState extends State<RegistrationPageOne> {
                         ),
                       ),
                     ),
+
                     const Sizer(),
                     TextFormField(
                         controller: addressController,
@@ -157,6 +180,10 @@ class _RegistrationPageOneState extends State<RegistrationPageOne> {
                             prefixIcon: Padding(
                                 padding: EdgeInsetsDirectional.all(10),
                                 child: Icon(Icons.add_location)))),
+
+
+                    const Sizer(),
+
                     ElevatedButton(
                         onPressed: validate, child: const Text("Next")),
                   ],

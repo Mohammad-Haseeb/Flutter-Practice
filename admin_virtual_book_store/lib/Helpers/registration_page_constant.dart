@@ -25,7 +25,8 @@ final KPasswordValidator=MultiValidator([
 final KAddressValidator=MultiValidator([
   RequiredValidator(errorText: 'address is required'),
   MinLengthValidator(8, errorText: 'Too short Address'),
-  MaxLengthValidator(32, errorText: 'Too long Address'),
+  MaxLengthValidator(32
+      , errorText: 'Too long Address'),
 
 ]);
 

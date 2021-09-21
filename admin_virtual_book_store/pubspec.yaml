@@ -37,6 +37,8 @@ dependencies:
   form_field_validator: ^1.0.1
   flutter_credit_card: ^2.0.0
   dropdown_plus: ^0.0.9
+  cloud_firestore: ^0.16.0+1
+  time_range_picker: ^2.0.1
 #  google_place: ^0.3.3
 #  flutter_dotenv: ^5.0.2
 #  google_maps_flutter: ^0.5.13

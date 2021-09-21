@@ -3,7 +3,7 @@ import 'package:admin_virtual_book_store/Components/logo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:admin_virtual_book_store/Screens/prodcutAdd/productfirstform.dart';
 import 'package:admin_virtual_book_store/Screens/registration.dart';
-
+import 'package:admin_virtual_book_store/Controller/main.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -24,29 +24,12 @@ class _LoginScreenState extends State<LoginScreen> {
    if(_formKey.currentState!.validate()){
      print(emailController.text);
      print(passwordController.text);
+    Main.seller?.loginVerification(emailController.text,passwordController.text);
+     Navigator.push(
+       context,
+       MaterialPageRoute(builder: (context) =>   addprodcutfirstform()),
+     );
 
-     try {
-       FirebaseAuth auth = FirebaseAuth.instance;
-                    final String userID=emailController.text;
-                    final String password=passwordController.text;
-       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-         email: userID,
-         password: password,
-       );
-       print(userCredential.user.uid);
-       print("Hello");
-       Navigator.push(
-         context,
-         MaterialPageRoute(builder: (context) =>   addprodcutfirstform()),
-       );
-
-     } on FirebaseAuthException catch (e) {
-       if (e.code == 'user-not-found') {
-         print('No user found for that email.');
-       } else if (e.code == 'wrong-password') {
-         print('Wrong password provided for that user.');
-       }
-     }
    }
 
  }
