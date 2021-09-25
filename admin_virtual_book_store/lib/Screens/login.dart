@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:admin_virtual_book_store/Screens/prodcutAdd/productfirstform.dart';
 import 'package:admin_virtual_book_store/Screens/registration.dart';
 import 'package:admin_virtual_book_store/Controller/main.dart';
+import 'package:admin_virtual_book_store/Controller/seller.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -24,10 +25,14 @@ class _LoginScreenState extends State<LoginScreen> {
    if(_formKey.currentState!.validate()){
      print(emailController.text);
      print(passwordController.text);
-    Main.seller?.loginVerification(emailController.text,passwordController.text);
-     Navigator.push(
+     final email=emailController.text.toString();
+     final password=passwordController.text.toString();
+     Main.seller=Seller();
+   final result= await Main.seller?.loginVerification(email,password);
+   print("Result ${result}");
+   Navigator.push(
        context,
-       MaterialPageRoute(builder: (context) =>   addprodcutfirstform()),
+       MaterialPageRoute(builder: (context) =>   addprodcutfirstform(uid : Main.seller?.getUid()),),
      );
 
    }

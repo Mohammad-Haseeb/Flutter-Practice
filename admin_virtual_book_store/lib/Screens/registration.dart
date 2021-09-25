@@ -43,7 +43,7 @@ class _RegistrationPageOneState extends State<RegistrationPageOne> {
         //   'full_name': "Mary Jane",
         //   'age': 18
         // });
-        Main.seller =Seller("Hello");
+        Main.seller =Seller();
        Main.seller?.AllInfoSetter(nameController.text
            ,phoneNumberController.text,emailController.text,passwordController.text ,addressController.text);
         //

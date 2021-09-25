@@ -4,20 +4,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:admin_virtual_book_store/Controller/logininterface.dart';
-
-class Seller extends Person implements Login {
+// implements Login
+class Seller extends Person  {
   late PaymentCard _paymentCard;
   late String _Shopname;
   String? loginemail;
   String? loginpassword;
-
+  String? _uid;
   late Map<String, String> _shopTime;
+
+  String?  getUid(){
+    return  _uid.toString();
+  }
+
+  void setUid(String value) {
+    _uid = value;
+  }
+
+
+  Seller() : super.named() {
+    print("String Seller");
+  }
+
 
   set Shopname(String value) {
     _Shopname = value;
   }
-   @override
-  void loginVerification(String email, String pass) async{
+
+
+  Future<bool> loginVerification(String email, String pass) async{
+     print("Hello First");
      try {
        FirebaseAuth auth = FirebaseAuth.instance;
        final String userID=email;
@@ -26,24 +42,27 @@ class Seller extends Person implements Login {
          email: userID,
          password: password,
        );
+       setUid(userCredential.user.uid);
        print(userCredential.user.uid);
        print("Hello");
+       return true;
 
      } on FirebaseAuthException catch (e) {
        if (e.code == 'user-not-found') {
-         print('No user found for that email.');
+         // return 'No user found for that email.';
+         return false;
        } else if (e.code == 'wrong-password') {
-         print('Wrong password provided for that user.');
+         // print('Wrong password provided for that user.');
+         return false;
        }
      }
+     return false;
    }
   bool statusCheck(){return false;}
 
   Map<String, String> get shopTime => _shopTime;
 
-  Seller(String val) : super.named() {
-    print("String Seller");
-  }
+
 
   PaymentCard get paymentCard => _paymentCard;
 
