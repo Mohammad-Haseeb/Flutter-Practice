@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:admin_virtual_book_store/Components/logo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:admin_virtual_book_store/Screens/prodcutAdd/productfirstform.dart';
+import 'package:admin_virtual_book_store/Screens/prodcut/productfirstform.dart';
 import 'package:admin_virtual_book_store/Screens/registration.dart';
 import 'package:admin_virtual_book_store/Controller/main.dart';
 import 'package:admin_virtual_book_store/Controller/seller.dart';
@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
    print("Result ${result}");
    Navigator.push(
        context,
-       MaterialPageRoute(builder: (context) =>   addprodcutfirstform(uid : Main.seller?.getUid()),),
+       MaterialPageRoute(builder: (context) =>   addprodcutfirstform(),),
      );
 
    }

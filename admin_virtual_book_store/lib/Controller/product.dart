@@ -3,19 +3,18 @@ class Prodcut {
   late String _description;
   late String _Category;
   late String _prize;
-  late String _reviews;
+  int _reviews=0;
   late bool _onlineAvailabilty;
   late String _totalBooksAvailable;
   late String _OwnerId;
   late String _image;
-
+  int _remaingBooksLot = 0;
   String get image => _image;
 
   set image(String value) {
     _image = value;
   }
 
-  int _remaingBooksLot = 0;
 
   String get OwnerId => _OwnerId;
 
@@ -64,9 +63,10 @@ class Prodcut {
     _prize = value;
   }
 
-  String get reviews => _reviews;
+  int get reviews => _reviews;
 
-  set reviews(String value) {
+  set reviews(int value) {
     _reviews = value;
   }
+
 }

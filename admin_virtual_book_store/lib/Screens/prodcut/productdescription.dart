@@ -4,11 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:admin_virtual_book_store/Controller/main.dart';
 import 'package:admin_virtual_book_store/Controller/stock.dart';
 import 'package:admin_virtual_book_store/Controller/product.dart';
+import 'package:admin_virtual_book_store/Screens/drawer.dart';
 
 class ProductDescriptionAndSubmit extends StatefulWidget {
-   ProductDescriptionAndSubmit({Prodcut? product});
-       Prodcut? prodcut;
-  @override
+   ProductDescriptionAndSubmit({this.statusOfRequest=true,  this.documentID});
+   final bool statusOfRequest;
+   final String? documentID;
+
+   @override
   _ProductDescriptionAndSubmitState createState() =>
       _ProductDescriptionAndSubmitState();
 }
@@ -16,15 +19,22 @@ class ProductDescriptionAndSubmit extends StatefulWidget {
 class _ProductDescriptionAndSubmitState
     extends State<ProductDescriptionAndSubmit> {
   final _formKey = GlobalKey<FormState>();
-   final _textController=TextEditingController();
+   final _textController=TextEditingController(text : "");
   void validate()async{
     // var image = Main.stock?.product?.image;
+    Main.stock?.getProdudct().description=_textController.text;
 
     print('Description image checker ${Main.stock?.getProdudct().image}');
     print(Main.stock?.getProdudct().prize);
-    Main.stock?.SendData();
+          if(widget.statusOfRequest==true){
+            print( await Main.stock?.SendData());
+
+          }
+          else{
+            Main.stock?.updateProduct(documentID:widget.documentID);
+          }
       // Main.stock?.product?.description=_textController.text;
-    dynamic pr=widget.prodcut;
+
       // pr.image;
   }
   @override
@@ -33,6 +43,8 @@ class _ProductDescriptionAndSubmitState
       appBar: AppBar(
         title: const Text("Add Product"),
       ),
+      drawer:  myDrawer(title: "Hello"),
+
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

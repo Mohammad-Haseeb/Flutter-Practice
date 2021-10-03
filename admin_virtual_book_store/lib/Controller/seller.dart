@@ -79,13 +79,15 @@ class Seller extends Person  {
 
   Future<String> sendData() async {
     try {
+      print("OH");
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: super.getEmail().toString(),
         password: super.getPassword(),
       );
+      print("ID CHECKE ARE AUTH ${userCredential.user.uid}");
       CollectionReference users =
-          FirebaseFirestore.instance.collection('Admin_Users_Registration_Data');
+         await  FirebaseFirestore.instance.collection('Admin_Users_Registration_Data');
       users.doc(userCredential.user.uid).set({
         "full_name": super.name,
         "phone_Number": super.getphoneNumber(),
@@ -97,9 +99,10 @@ class Seller extends Person  {
           "card_number": this.paymentCard.paymentCardNumber,
           "cvv": this.paymentCard.cvc,
           "ExpiryDate": this.paymentCard.expiryDate,
-          "crad_holdername": this.paymentCard.holderName
+          "card_holdername": this.paymentCard.holderName
         }
       });
+      print("ID CHECKE AFTER Registration ${users.id}");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
